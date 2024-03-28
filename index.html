@@ -7,49 +7,83 @@
     <meta name="lomadee-verification" content="22540080" />
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
+        /* Estilos claros */
+        .light-mode {
+            --background-color: #f8f9fa;
+            --text-color: #000;
+            --container-background: #fff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --title-color: #000;
+            --link-color: #007bff;
+            --footer-color: #444;
+            --name-color: #000; /* Cor do nome "Jacky Mayers" no modo claro */
+        }
+
+        /* Estilos escuros */
+        .dark-mode {
+            --background-color: #212529;
+            --text-color: #fff;
+            --container-background: #343a40;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --title-color: #ffc107;
+            --link-color: #007bff;
+            --footer-color: #dee2e6;
+            --name-color: #fff; /* Cor do nome "Jacky Mayers" no modo escuro */
+        }
+
+        /* Estilo comum */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #000;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Para garantir que o botão fique abaixo dos ícones */
+            align-items: center; /* Para centralizar horizontalmente */
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             text-align: center;
-            background-color: #fff;
+            background-color: var(--container-background);
             border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 20px var(--shadow);
         }
         h1 {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #000;
             transition: color 0.3s ease;
         }
-        h1:hover {
-            color: #007bff;
+        h1.light-mode {
+            color: var(--name-color); /* Texto "Jacky Mayers" na cor definida para o modo claro */
         }
-        p {
-            font-size: 18px;
-            margin-bottom: 20px;
+        h1.dark-mode {
+            color: var(--name-color); /* Texto "Jacky Mayers" na cor definida para o modo escuro */
+        }
+        h1:hover {
+            color: var(--link-color);
         }
         .social-links {
             margin-top: 20px;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap; /* Permite que os ícones quebrem a linha conforme necessário */
         }
         .social-links a {
             display: inline-block;
             margin: 0 15px;
+            margin-bottom: 20px; /* Adiciona um espaço entre os ícones */
             width: 100px;
             height: 100px;
             line-height: 100px;
             border-radius: 50%;
             overflow: hidden;
-            background-color: #007bff;
+            background-color: var(--link-color);
             transition: transform 0.3s ease;
         }
         .social-links a:hover {
@@ -80,14 +114,27 @@
             }
         }
         .footer {
-            margin-top: 50px;
+            margin-top: 20px; /* Alterado para melhorar o posicionamento do botão */
             font-size: 14px;
             text-align: center;
-            color: #444; /* Cor mais escura para os direitos reservados */
+            color: var(--footer-color);
+        }
+        .mode-toggle {
+            margin-top: 20px; /* Adiciona espaço entre os ícones e o botão */
+            background-color: var(--link-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .mode-toggle:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
-<body>
+<body class="light-mode">
     <div class="container">
         <h1>Jacky Mayers</h1>
         <p>"Sou o campeão mundial em ser terrível em todos os jogos que existem. Mas olha pelo lado positivo, pelo menos eu sou consistente na minha inconsistência!" 🎮😄</p>
@@ -103,8 +150,24 @@
     <div class="profile-image-container">
         <img class="profile-image" src="https://media.discordapp.net/attachments/1191751155013914644/1196987283916718210/emote.png?ex=6615e947&is=66037447&hm=3dc5edaf07a969b46d368971b9e4a31a9a01ff240c5e969a75c859e7288e871d&=&format=webp&quality=lossless" alt="Imagem de Perfil">
     </div>
+    <button class="mode-toggle" onclick="toggleMode()">Alternar Modo</button>
     <div class="footer">
         <p>Direitos Reservados &copy; 2024 Jacky Mayers</p>
     </div>
+
+    <script>
+        function toggleMode() {
+            var body = document.body;
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+
+            var button = document.querySelector('.mode-toggle');
+            if (body.classList.contains('dark-mode')) {
+                button.textContent = "Claro";
+            } else {
+                button.textContent = "Escuro";
+            }
+        }
+    </script>
 </body>
 </html>
